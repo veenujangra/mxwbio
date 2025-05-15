@@ -1,5 +1,7 @@
 import gsap from 'gsap'
 import Lenis from 'lenis'
+import Title from '../animations/title'
+import Image from '../animations/image'
 
 export default class Page {
   private element: HTMLElement
@@ -11,6 +13,7 @@ export default class Page {
   }
   lenis: Lenis = new Lenis({})
   tl: gsap.core.Timeline = gsap.timeline({})
+  animationsArray: (Title | Image)[] | undefined
 
   constructor(options: { element: HTMLElement }) {
     this.element = options.element
@@ -31,6 +34,10 @@ export default class Page {
 
     this.createSmoothScroll()
     this.addEventListener()
+  }
+
+  getLenis() {
+    return this.lenis
   }
 
   createSmoothScroll() {
@@ -57,15 +64,38 @@ export default class Page {
 
   private createAnimations() {
     // Placeholder for animation creation logic
+    this.animationsArray = []
+
+    const titleElements = Array.from(document.querySelectorAll(this.animations.base.title)).map((el) => {
+      return new Title({ element: el as HTMLElement })
+    })
+    this.animationsArray.push(...titleElements)
+
+    const imageElements = Array.from(document.querySelectorAll(this.animations.base.image)).map((el) => {
+      return new Image({ element: el as HTMLElement })
+    })
+    this.animationsArray.push(...imageElements)
+
+    // Initialize fade-in-up animations
+    const fadeUpElements = Array.from(document.querySelectorAll(this.animations.fade.up)).map((el) => {
+      return new Title({ element: el as HTMLElement })
+    })
+    this.animationsArray.push(...fadeUpElements)
   }
 
   show() {
     this.tl = gsap.timeline({})
-    this.tl.to(this.element, {
-      duration: 0.63,
-      opacity: 1,
-      ease: 'power3.out',
-    })
+    this.tl.fromTo(
+      this.element,
+      {
+        autoAlpha: 0,
+      },
+      {
+        duration: 0.63,
+        autoAlpha: 1,
+        ease: 'power3.in',
+      }
+    )
   }
 
   destroy() {
