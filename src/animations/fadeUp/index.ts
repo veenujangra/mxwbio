@@ -3,6 +3,7 @@ import gsap from 'gsap'
 
 export default class FadeUp extends Animation {
   settings: { delay: string; duration: string; ease: string }
+  tl: any
 
   constructor(options: { element: HTMLElement }) {
     super(options)
@@ -24,17 +25,22 @@ export default class FadeUp extends Animation {
   setProperties() {
     // Set initial properties for the fade-up animation
     gsap.set(this.element, {
-      autoAlpha: 0,
+      opacity: 0,
       y: 20,
     })
   }
 
   animateIn() {
+    if (this.tl) {
+      this.tl.kill()
+    }
     if (!this.element || this.element.classList.contains('is-animated')) return
+    this.tl = gsap.timeline({})
+
     // Animation logic for when the element comes into view
-    gsap.to(this.element, {
+    this.tl.to(this.element, {
       duration: this.settings.duration,
-      autoAlpha: 1,
+      opacity: 1,
       y: 0,
       ease: this.settings.ease,
       delay: parseFloat(this.settings.delay),
@@ -46,11 +52,11 @@ export default class FadeUp extends Animation {
 
   animateOut() {
     // Animation logic for when the element goes out of view
-    gsap.to(this.element, {
-      autoAlpha: 0,
-      y: -20,
-      duration: 0.63,
-      ease: 'power1.out',
-    })
+    // this.tl.to(this.element, {
+    //   autoAlpha: 0,
+    //   y: -20,
+    //   duration: 0.63,
+    //   ease: 'power1.out',
+    // })
   }
 }

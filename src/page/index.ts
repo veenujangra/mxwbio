@@ -2,6 +2,7 @@ import gsap from 'gsap'
 import Lenis from 'lenis'
 import Title from '../animations/title'
 import Image from '../animations/image'
+import FadeUp from '../animations/fadeUp'
 
 export default class Page {
   private element: HTMLElement
@@ -78,7 +79,7 @@ export default class Page {
 
     // Initialize fade-in-up animations
     const fadeUpElements = Array.from(document.querySelectorAll(this.animations.fade.up)).map((el) => {
-      return new Title({ element: el as HTMLElement })
+      return new FadeUp({ element: el as HTMLElement })
     })
     this.animationsArray.push(...fadeUpElements)
   }
