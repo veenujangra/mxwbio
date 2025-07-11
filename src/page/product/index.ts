@@ -1,3 +1,4 @@
+import Accordion from '@pixeto/accordion'
 import Page from '..'
 
 export default class Product extends Page {
@@ -13,6 +14,7 @@ export default class Product extends Page {
 
   create() {
     super.create()
+    new Accordion()
     // super.show()
   }
 

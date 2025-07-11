@@ -1,3 +1,4 @@
+import Accordion from '@pixeto/accordion'
 import Page from '..'
 import DiscoveryVideoScale from './discoveryVideoScale'
 import HeroAnimation from './heroAnimation'
@@ -15,6 +16,7 @@ export default class Home extends Page {
 
   create() {
     super.create()
+    new Accordion()
     // super.show()
 
     this.createHero()
