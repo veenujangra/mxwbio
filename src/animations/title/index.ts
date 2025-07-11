@@ -38,7 +38,7 @@ export default class Title extends Animation {
 
     gsap.set(this.text.lines, {
       autoAlpha: 0,
-      y: '70%',
+      y: '50%',
     })
   }
 
@@ -48,6 +48,7 @@ export default class Title extends Animation {
     }
     if (!this.text) return
 
+    if (!this.element || this.element.classList.contains('is-animated')) return
     this.tl = gsap.timeline({})
 
     if (!this.text) return
@@ -56,7 +57,7 @@ export default class Title extends Animation {
       {
         y: '50%',
         autoAlpha: 0,
-        filter: 'blur(2px)',
+        filter: 'blur(4px)',
       },
       {
         y: '0%',
@@ -67,10 +68,10 @@ export default class Title extends Animation {
         ease: this.settings.ease,
         delay: parseFloat(this.settings.delay),
         onComplete: () => {
-          this.element.classList.add('is-animated')
           this.text?.revert()
           this.text = undefined
           this.tl = undefined
+          this.element.classList.add('is-animated')
         },
       }
     )

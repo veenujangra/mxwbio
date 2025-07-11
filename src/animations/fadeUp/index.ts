@@ -11,7 +11,7 @@ export default class FadeUp extends Animation {
     this.settings = {
       delay: this.element.getAttribute('data-delay') || '0',
       duration: this.element.getAttribute('data-duration') || '0.63',
-      ease: this.element.getAttribute('data-ease') || 'power1.in',
+      ease: this.element.getAttribute('data-ease') || 'power1.inOut',
     }
 
     this.create()
@@ -38,16 +38,25 @@ export default class FadeUp extends Animation {
     this.tl = gsap.timeline({})
 
     // Animation logic for when the element comes into view
-    this.tl.to(this.element, {
-      duration: this.settings.duration,
-      opacity: 1,
-      y: 0,
-      ease: this.settings.ease,
-      delay: parseFloat(this.settings.delay),
-      onComplete: () => {
-        this.element.classList.add('is-animated')
+    this.tl.fromTo(
+      this.element,
+      {
+        opacity: 0,
+        y: 20,
+        filter: 'blur(2px)',
       },
-    })
+      {
+        duration: this.settings.duration,
+        opacity: 1,
+        y: 0,
+        filter: 'blur(0px)',
+        ease: this.settings.ease,
+        delay: parseFloat(this.settings.delay),
+        onComplete: () => {
+          this.element.classList.add('is-animated')
+        },
+      }
+    )
   }
 
   animateOut() {

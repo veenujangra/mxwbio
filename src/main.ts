@@ -1,17 +1,32 @@
 import Home from './page/home'
+import Product from './page/product'
 import './style.css'
 
-class Klearmind {
+class MaxWellBiosystems {
   home: Home | undefined
+  product: Product | undefined
 
   constructor() {
     this.createPage()
   }
 
   createPage() {
-    this.home = new Home({
-      element: document.querySelector('[data-page="home"]') as HTMLElement,
-    })
+    /**
+     * Home Page
+     */
+    if (document.querySelector('[data-page="home"]')) {
+      this.home = new Home({
+        element: document.querySelector('[data-page="home"]') as HTMLElement,
+      })
+    }
+    /**
+     * Product Page
+     */
+    if (document.querySelector('[data-page="product"]')) {
+      this.product = new Product({
+        element: document.querySelector('[data-page="product"]') as HTMLElement,
+      })
+    }
   }
 
   addEventListeners() {
@@ -21,4 +36,4 @@ class Klearmind {
   onResize() {}
 }
 
-new Klearmind()
+new MaxWellBiosystems()

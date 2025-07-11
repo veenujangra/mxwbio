@@ -1,22 +1,46 @@
 import Page from '..'
-import Accordion from '@pixeto/accordion'
-import Gallery from '../../animations/gallery'
+import DiscoveryVideoScale from './discoveryVideoScale'
+import HeroAnimation from './heroAnimation'
+import Logo from './logo'
 
 export default class Home extends Page {
+  pageElement: HTMLElement
+
   constructor(options: { element: HTMLElement }) {
     super(options)
+    this.pageElement = options.element
     this.lenis = super.getLenis()
     this.create()
   }
 
   create() {
     super.create()
-    // Initialize the accordion
-    super.show()
-    new Accordion()
+    // super.show()
 
-    // Initialize the gallery
-    new Gallery({ list: Array.from(document.querySelectorAll('[data-gallery=list]')), lenis: this.lenis })
+    this.createHero()
+    this.createDiscoveryVideoScale()
+    this.createLogoAnimation()
+  }
+
+  createHero() {
+    new HeroAnimation({
+      element: this.pageElement,
+    }).create()
+  }
+
+  createDiscoveryVideoScale() {
+    new DiscoveryVideoScale({
+      element: this.pageElement,
+    }).create()
+  }
+
+  createLogoAnimation() {
+    if (window.innerWidth < 768) {
+      return
+    }
+    new Logo({
+      element: this.pageElement,
+    }).create()
   }
 
   onResize() {

@@ -3,6 +3,7 @@ import Lenis from 'lenis'
 import Title from '../animations/title'
 import Image from '../animations/image'
 import FadeUp from '../animations/fadeUp'
+import ScrollToSection from './utils/scrollTo'
 
 export default class Page {
   private element: HTMLElement
@@ -11,10 +12,11 @@ export default class Page {
   animations: {
     base: { title: string; text: string; image: string }
     fade: { default: string; up: string; down: string; left: string; right: string }
+    scrollTo: { default: string }
   }
   lenis: Lenis = new Lenis({})
   tl: gsap.core.Timeline = gsap.timeline({})
-  animationsArray: (Title | Image)[] | undefined
+  animationsArray: (Title | Image | ScrollToSection)[] | undefined
 
   constructor(options: { element: HTMLElement }) {
     this.element = options.element
@@ -30,6 +32,9 @@ export default class Page {
         down: '[data-animation="fade-in-down"]',
         left: '[data-animation="fade-in-left"]',
         right: '[data-animation="fade-in-right"]',
+      },
+      scrollTo: {
+        default: '[data-scroll]',
       },
     }
 
@@ -82,6 +87,12 @@ export default class Page {
       return new FadeUp({ element: el as HTMLElement })
     })
     this.animationsArray.push(...fadeUpElements)
+
+    // Initialize ScrollTo animations
+    const scrollToElements = Array.from(document.querySelectorAll(this.animations.scrollTo.default)).map((el) => {
+      return new ScrollToSection({ element: el as HTMLElement, lenis: this.lenis as Lenis })
+    })
+    this.animationsArray.push(...scrollToElements)
   }
 
   show() {

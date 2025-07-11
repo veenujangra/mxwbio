@@ -13,7 +13,18 @@ export default class Animation {
 
   createObserver() {
     this.observerOptions = {
-      rootMargin: this.element.getAttribute('data-root-margin') || '0px 0px 0px 0px',
+      /**
+       * The root element for the observer. If not specified, the viewport is used.
+       * If the value is 'null', the observer will use the viewport as the root.
+       * If the value is a string, it should be a selector for the root element.
+       * If the value is a DOM element, it will be used as the root.
+       * example value could be 'null', '#myRootElement', or document.querySelector('#myRootElement')
+       *
+       */
+      rootMargin: this.element.getAttribute('data-root-margin') || '0px 0px -20% 0px',
+      /**
+       * Threshold is a value between 0 and 1 that indicates the percentage of the target's visibility the observer's callback should be executed.
+       */
       threshold: parseFloat(this.element.getAttribute('data-threshold') || '0'),
     }
 

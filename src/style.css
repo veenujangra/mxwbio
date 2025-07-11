@@ -1,0 +1,15 @@
+/* [data-logo-animation='text']:nth-child(2) {
+  position: relative;
+}
+
+[data-logo-animation='text']:nth-child(2):before {
+  // fading gradient on the left side
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: red;
+  pointer-events: none;
+} */

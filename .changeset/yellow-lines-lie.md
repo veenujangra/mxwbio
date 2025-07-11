@@ -1,5 +1,0 @@
----
-"@pixeto/klearmind": patch
----
-
-build
