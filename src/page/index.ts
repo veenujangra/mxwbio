@@ -4,6 +4,7 @@ import Title from '../animations/title'
 import Image from '../animations/image'
 import FadeUp from '../animations/fadeUp'
 import ScrollToSection from './utils/scrollTo'
+import CloseCaption from './utils/closeCaptions'
 
 export default class Page {
   private element: HTMLElement
@@ -13,10 +14,11 @@ export default class Page {
     base: { title: string; text: string; image: string }
     fade: { default: string; up: string; down: string; left: string; right: string }
     scrollTo: { default: string }
+    closeCaptions: { default: string }
   }
   lenis: Lenis = new Lenis({})
   tl: gsap.core.Timeline = gsap.timeline({})
-  animationsArray: (Title | Image | ScrollToSection)[] | undefined
+  animationsArray: (Title | Image | ScrollToSection | CloseCaption)[] | undefined
 
   constructor(options: { element: HTMLElement }) {
     this.element = options.element
@@ -35,6 +37,9 @@ export default class Page {
       },
       scrollTo: {
         default: '[data-scroll]',
+      },
+      closeCaptions: {
+        default: '[data-close-caption]',
       },
     }
 
@@ -93,6 +98,12 @@ export default class Page {
       return new ScrollToSection({ element: el as HTMLElement, lenis: this.lenis as Lenis })
     })
     this.animationsArray.push(...scrollToElements)
+
+    // Initialize CloseCaption animations
+    const closeCaptionElements = Array.from(document.querySelectorAll(this.animations.closeCaptions.default)).map((el) => {
+      return new CloseCaption({ element: el as HTMLElement })
+    })
+    this.animationsArray.push(...closeCaptionElements)
   }
 
   show() {
