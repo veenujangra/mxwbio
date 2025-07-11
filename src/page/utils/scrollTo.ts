@@ -57,11 +57,14 @@ export default class ScrollToSection {
         //  add Offset top to scroll
 
         const targetElement = document.getElementById(this.targetID)
+
         if (targetElement) {
+          const offset = (window.innerHeight - targetElement?.offsetHeight) / 2
+
           this.lenis.scrollTo(targetElement, {
             duration: 1.2,
             easing: (t) => t * (2 - t), // easeInOutQuad
-            offset: -200,
+            offset: -offset,
           })
         } else {
           console.error('Target element not found:', this.targetID)

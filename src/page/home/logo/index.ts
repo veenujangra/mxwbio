@@ -71,6 +71,18 @@ export default class Logo {
           ease: 'power2.inOut',
         }
       )
+      .fromTo(
+        animationElements[0],
+        {
+          color: '#5DB0E5',
+        },
+        {
+          color: '#135BA3',
+          duration: 0.444,
+          ease: 'power2.inOut',
+        },
+        '<'
+      )
       .to(
         fade,
         {
