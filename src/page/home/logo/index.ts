@@ -48,7 +48,7 @@ export default class Logo {
           marginRight: '0rem',
         },
         {
-          borderColor: 'var(--_colors---brand-blue)',
+          borderColor: '#5DB0E5',
           marginLeft: '1rem',
           marginRight: '1rem',
           duration: 0.444,
