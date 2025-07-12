@@ -1,10 +1,12 @@
 import Home from './page/home'
 import Product from './page/product'
+import Symposium from './page/symposium'
 import './style.css'
 
 class MaxWellBiosystems {
   home: Home | undefined
   product: Product | undefined
+  symposium: Symposium | undefined
 
   constructor() {
     this.createPage()
@@ -25,6 +27,14 @@ class MaxWellBiosystems {
     if (document.querySelector('[data-page="product"]')) {
       this.product = new Product({
         element: document.querySelector('[data-page="product"]') as HTMLElement,
+      })
+    }
+    /**
+     * Symposium Page
+     */
+    if (document.querySelector('[data-page="symposium"]')) {
+      this.symposium = new Symposium({
+        element: document.querySelector('[data-page="symposium"]') as HTMLElement,
       })
     }
   }
