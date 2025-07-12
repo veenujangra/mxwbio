@@ -59,8 +59,8 @@ export default class ScrollToSection {
         const targetElement = document.getElementById(this.targetID)
 
         if (targetElement) {
-          const offset = (window.innerHeight - targetElement?.offsetHeight) / 2
-
+          const offset = Math.max((window.innerHeight - targetElement?.offsetHeight) / 2, 100)
+          console.log('Scrolling to target element:', this.targetID, 'with offset:', offset)
           this.lenis.scrollTo(targetElement, {
             duration: 1.2,
             easing: (t) => t * (2 - t), // easeInOutQuad
