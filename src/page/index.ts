@@ -3,8 +3,8 @@ import Lenis from 'lenis'
 import Title from '../animations/title'
 import Image from '../animations/image'
 import FadeUp from '../animations/fadeUp'
-import ScrollToSection from './utils/scrollTo'
-import CloseCaption from './utils/closeCaptions'
+import ScrollToSection from '../utils/scrollTo'
+import CloseCaption from '../utils/closeCaptions'
 
 export default class Page {
   private element: HTMLElement
