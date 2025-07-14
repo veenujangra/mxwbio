@@ -3,6 +3,7 @@ import Product from './page/product'
 import Symposium from './page/symposium'
 import Story from './page/story'
 import './style.css'
+import People from './page/people'
 
 class MaxWellBiosystems {
   home: Home | undefined
@@ -44,6 +45,14 @@ class MaxWellBiosystems {
     if (document.querySelector('[data-page="story"]')) {
       this.story = new Story({
         element: document.querySelector('[data-page="story"]') as HTMLElement,
+      })
+    }
+    /**
+     * People Page
+     */
+    if (document.querySelector('[data-page="people"]')) {
+      new People({
+        element: document.querySelector('[data-page="people"]') as HTMLElement,
       })
     }
   }
