@@ -11,20 +11,29 @@ export default class Logo {
     // Register GSAP ScrollTrigger plugin
     gsap.registerPlugin(ScrollTrigger)
 
-    const wrapper = this.element.querySelector('[data-logo-animation="wrapper"]') as HTMLElement | null
-    const animationElements = wrapper ? (wrapper.querySelectorAll('[data-logo-animation="text"]') as NodeList) : null
+    const wrapper = this.element.querySelector(
+      '[data-logo-animation="wrapper"]'
+    ) as HTMLElement | null
+    const animationElements = wrapper
+      ? (wrapper.querySelectorAll('[data-logo-animation="text"]') as NodeList)
+      : null
     const fade = wrapper?.querySelectorAll('.home_maxwell_animation-fade')
 
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: wrapper,
         start: 'top top',
-        end: 'center 30%',
+        end: 'center 80%',
         scrub: 1,
       },
     })
 
-    if (!animationElements || animationElements.length === 0 || !fade || fade.length === 0) {
+    if (
+      !animationElements ||
+      animationElements.length === 0 ||
+      !fade ||
+      fade.length === 0
+    ) {
       console.warn('No animation elements found for logo animation.')
       return
     }
