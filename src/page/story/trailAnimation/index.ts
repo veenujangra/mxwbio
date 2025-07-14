@@ -30,6 +30,7 @@ export default class Trail {
       block: block,
       // block: blocks.querySelector('[data-trail-animation="block"]') as HTMLElement | null,
       trail: block.querySelector('[data-trail-animation="trail"]') as HTMLElement,
+      progress: block.querySelector('[data-trail-animation="progress"]') as HTMLElement,
     }
 
     // Calculate the width of all trials direct children as a single width
@@ -44,7 +45,7 @@ export default class Trail {
       scrollTrigger: {
         trigger: animationElements?.block,
         start: 'bottom bottom',
-        end: `+=${width}`,
+        end: `+=${width + 999}`,
         scrub: 1,
         pin: true,
         // anticipatePin: 1,
@@ -55,5 +56,15 @@ export default class Trail {
     tl.to(animationElements.trail, {
       x: -width,
     })
+    // percentage progress bar animation
+    // Start at the same time as the trail animation
+
+    tl.to(
+      animationElements.progress,
+      {
+        width: '100%',
+      },
+      '<'
+    )
   }
 }
