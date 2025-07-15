@@ -43,6 +43,7 @@ export default class HeroAnimation {
       },
       {
         autoAlpha: 0,
+        duration: 0.1,
         ease: 'power1.inOut',
       }
     ).fromTo(

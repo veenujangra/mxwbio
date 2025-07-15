@@ -69,11 +69,13 @@ export default class Logo {
         animationElements[1],
         {
           width: '0%',
+          color: '#5DB0E5',
           height: '2ch',
         },
         {
           width: 'auto',
           height: 'auto',
+          color: '#135BA3',
           marginLeft: '0rem',
           marginRight: '0rem',
           duration: 1,
@@ -90,7 +92,7 @@ export default class Logo {
           duration: 0.444,
           ease: 'power2.inOut',
         },
-        '<'
+        '<=+0.3'
       )
       .to(
         fade,
