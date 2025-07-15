@@ -2,6 +2,8 @@ import Home from './page/home'
 import Product from './page/product'
 import Symposium from './page/symposium'
 import Story from './page/story'
+import Organoids from './page/organoids'
+
 import './style.css'
 import People from './page/people'
 
@@ -10,6 +12,7 @@ class MaxWellBiosystems {
   product: Product | undefined
   symposium: Symposium | undefined
   story: Story | undefined
+  organoids: Organoids | undefined
   constructor() {
     this.createPage()
   }
@@ -53,6 +56,14 @@ class MaxWellBiosystems {
     if (document.querySelector('[data-page="people"]')) {
       new People({
         element: document.querySelector('[data-page="people"]') as HTMLElement,
+      })
+    }
+    /**
+     * Organoids Page
+     */
+    if (document.querySelector('[data-page="organoids"]')) {
+      this.organoids = new Organoids({
+        element: document.querySelector('[data-page="organoids"]') as HTMLElement,
       })
     }
   }
