@@ -24,5 +24,23 @@ export default class Speaker {
         cards.forEach((c) => c.classList.remove('is--open'))
       })
     })
+
+    this.closeAll()
+  }
+
+  closeAll() {
+    // Close all speaker cards with click outside the card
+    document.addEventListener(
+      'click',
+      (event) => {
+        const target = event.target as HTMLElement
+        const isCard = target.closest('[data-speaker="card"]')
+        if (!isCard) {
+          const cards = this.element.querySelectorAll('[data-speaker="card"]')
+          cards.forEach((c) => c.classList.remove('is--open'))
+        }
+      },
+      { passive: true }
+    ) // Use passive event listener for performance
   }
 }
