@@ -11,19 +11,27 @@ export default class HeroAnimation {
     // Register GSAP ScrollTrigger plugin
     gsap.registerPlugin(ScrollTrigger)
 
-    const wrapper = this.element.querySelector('[data-hero-animation="wrapper"]') as HTMLElement | null
+    const wrapper = this.element.querySelector(
+      '[data-hero-animation="wrapper"]'
+    ) as HTMLElement | null
     const animationElements = {
       wrapper: wrapper as HTMLElement,
-      header: wrapper ? (wrapper.querySelector('[data-hero-animation="header"]') as HTMLElement) : null,
-      content: wrapper ? (wrapper.querySelector('[data-hero-animation="content"]') as HTMLElement) : null,
-      shadow: wrapper ? (wrapper.querySelector('[data-hero-animation="shadow"]') as HTMLElement) : null,
+      header: wrapper
+        ? (wrapper.querySelector('[data-hero-animation="header"]') as HTMLElement)
+        : null,
+      content: wrapper
+        ? (wrapper.querySelector('[data-hero-animation="content"]') as HTMLElement)
+        : null,
+      shadow: wrapper
+        ? (wrapper.querySelector('[data-hero-animation="shadow"]') as HTMLElement)
+        : null,
     }
 
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: animationElements?.wrapper,
         start: 'top top',
-        end: 'bottom 90%',
+        end: 'center center',
         scrub: 1,
       },
     })

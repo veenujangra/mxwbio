@@ -2,6 +2,7 @@ import Accordion from '@pixeto/accordion'
 import Page from '..'
 import HeroAnimation from './heroAnimation'
 import Speaker from './speakers'
+import DiscoveryVideoScale from './discoveryVideoScale'
 
 export default class Symposium extends Page {
   pageElement: HTMLElement
@@ -22,6 +23,7 @@ export default class Symposium extends Page {
     new Accordion()
     this.createHeroAnimation()
     this.createSpeakersAccordion()
+    this.createDiscoveryVideoScale()
   }
 
   createSpeakersAccordion() {
@@ -33,6 +35,12 @@ export default class Symposium extends Page {
   createHeroAnimation() {
     new HeroAnimation({
       element: this.pageElement,
+    }).create()
+  }
+
+  createDiscoveryVideoScale() {
+    new DiscoveryVideoScale({
+      element: this.pageElement as HTMLElement,
     }).create()
   }
 
