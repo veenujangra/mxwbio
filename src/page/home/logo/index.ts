@@ -11,29 +11,20 @@ export default class Logo {
     // Register GSAP ScrollTrigger plugin
     gsap.registerPlugin(ScrollTrigger)
 
-    const wrapper = this.element.querySelector(
-      '[data-logo-animation="wrapper"]'
-    ) as HTMLElement | null
-    const animationElements = wrapper
-      ? (wrapper.querySelectorAll('[data-logo-animation="text"]') as NodeList)
-      : null
+    const wrapper = this.element.querySelector('[data-logo-animation="wrapper"]') as HTMLElement | null
+    const animationElements = wrapper ? (wrapper.querySelectorAll('[data-logo-animation="text"]') as NodeList) : null
     const fade = wrapper?.querySelectorAll('.home_maxwell_animation-fade')
 
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: wrapper,
         start: 'top top',
-        end: 'center 80%',
+        end: 'center 30%',
         scrub: 1,
       },
     })
 
-    if (
-      !animationElements ||
-      animationElements.length === 0 ||
-      !fade ||
-      fade.length === 0
-    ) {
+    if (!animationElements || animationElements.length === 0 || !fade || fade.length === 0) {
       console.warn('No animation elements found for logo animation.')
       return
     }
@@ -69,18 +60,27 @@ export default class Logo {
         animationElements[1],
         {
           width: '0%',
-          color: '#5DB0E5',
           height: '2ch',
         },
         {
           width: 'auto',
           height: 'auto',
-          color: '#135BA3',
           marginLeft: '0rem',
           marginRight: '0rem',
           duration: 1,
           ease: 'power2.inOut',
         }
+      )
+      .fromTo(
+        animationElements[1],
+        {
+          color: '#5DB0E5',
+        },
+        {
+          color: '#135BA3',
+          ease: 'power2.inOut',
+        },
+        '<=+0.5'
       )
       .fromTo(
         animationElements[0],
@@ -92,7 +92,7 @@ export default class Logo {
           duration: 0.444,
           ease: 'power2.inOut',
         },
-        '<=+0.3'
+        '<'
       )
       .to(
         fade,
@@ -101,7 +101,7 @@ export default class Logo {
           duration: 0.444,
           ease: 'power2.inOut',
         },
-        '-=0.3'
+        '<-=0.3'
       )
       .to(
         animationElements[1],
@@ -109,7 +109,12 @@ export default class Logo {
           borderColor: 'transparent',
           duration: 0.444,
         },
-        '-=0.4'
+        '<+=0.444'
       )
+      .to(animationElements, {
+        autoAlpha: 0.2,
+        duration: 0.444,
+        ease: 'power2.inOut',
+      })
   }
 }

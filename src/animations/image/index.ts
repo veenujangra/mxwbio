@@ -28,7 +28,7 @@ export default class image extends Animation {
   }
 
   animateIn() {
-    if (!this.element || this.element.classList.contains('is-animated')) return
+    if (!this.element) return
 
     // Animation logic for when the image comes into view
     gsap.fromTo(
@@ -43,9 +43,9 @@ export default class image extends Animation {
         filter: 'blur(0px)',
         ease: this.settings.ease,
         delay: parseFloat(this.settings.delay),
-        onComplete: () => {
-          this.element.classList.add('is-animated')
-        },
+        // onComplete: () => {
+        //   this.element.classList.add('is-animated')
+        // },
       }
     )
   }

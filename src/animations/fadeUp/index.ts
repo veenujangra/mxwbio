@@ -34,7 +34,7 @@ export default class FadeUp extends Animation {
     if (this.tl) {
       this.tl.kill()
     }
-    if (!this.element || this.element.classList.contains('is-animated')) return
+    if (!this.element) return
     this.tl = gsap.timeline({})
 
     // Animation logic for when the element comes into view
@@ -52,20 +52,12 @@ export default class FadeUp extends Animation {
         filter: 'blur(0px)',
         ease: this.settings.ease,
         delay: parseFloat(this.settings.delay),
-        onComplete: () => {
-          this.element.classList.add('is-animated')
-        },
       }
     )
   }
 
   animateOut() {
-    // Animation logic for when the element goes out of view
-    // this.tl.to(this.element, {
-    //   autoAlpha: 0,
-    //   y: -20,
-    //   duration: 0.63,
-    //   ease: 'power1.out',
-    // })
+    if (!this.element || !this.element.hasAttribute('data-allow-repeat')) return
+    this.tl.revert()
   }
 }

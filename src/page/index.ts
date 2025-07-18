@@ -5,6 +5,8 @@ import Image from '../animations/image'
 import FadeUp from '../animations/fadeUp'
 import ScrollToSection from '../utils/scrollTo'
 import CloseCaption from '../utils/closeCaptions'
+import ImageCredit from '../utils/addImageCredit'
+import JumpToNextSection from '../utils/jumpToNextSection'
 
 export default class Page {
   private element: HTMLElement
@@ -15,10 +17,12 @@ export default class Page {
     fade: { default: string; up: string; down: string; left: string; right: string }
     scrollTo: { default: string }
     closeCaptions: { default: string }
+    addImageCredit: { default: string }
+    jumpToNextSection: { default: string }
   }
   lenis: Lenis = new Lenis({})
   tl: gsap.core.Timeline = gsap.timeline({})
-  animationsArray: (Title | Image | ScrollToSection | CloseCaption)[] | undefined
+  animationsArray: (Title | Image | ScrollToSection | CloseCaption | ImageCredit | JumpToNextSection)[] | undefined
 
   constructor(options: { element: HTMLElement }) {
     this.element = options.element
@@ -40,6 +44,12 @@ export default class Page {
       },
       closeCaptions: {
         default: '[data-close-caption]',
+      },
+      addImageCredit: {
+        default: '[data-add-image-credit]',
+      },
+      jumpToNextSection: {
+        default: '[jump-to-next-section]',
       },
     }
 
@@ -95,15 +105,36 @@ export default class Page {
 
     // Initialize ScrollTo animations
     const scrollToElements = Array.from(document.querySelectorAll(this.animations.scrollTo.default)).map((el) => {
-      return new ScrollToSection({ element: el as HTMLElement, lenis: this.lenis as Lenis })
+      return new ScrollToSection({
+        element: el as HTMLElement,
+        lenis: this.lenis as Lenis,
+      })
     })
     this.animationsArray.push(...scrollToElements)
 
     // Initialize CloseCaption animations
-    const closeCaptionElements = Array.from(document.querySelectorAll(this.animations.closeCaptions.default)).map((el) => {
-      return new CloseCaption({ element: el as HTMLElement })
-    })
+    const closeCaptionElements = Array.from(document.querySelectorAll(this.animations.closeCaptions.default)).map(
+      (el) => {
+        return new CloseCaption({ element: el as HTMLElement })
+      }
+    )
     this.animationsArray.push(...closeCaptionElements)
+
+    // Initialize ImageCredit animations
+    const imageCreditElements = Array.from(document.querySelectorAll(this.animations.addImageCredit.default)).map(
+      (el) => {
+        return new ImageCredit({ element: el as HTMLImageElement })
+      }
+    )
+    this.animationsArray.push(...imageCreditElements)
+
+    // Initialize JumpToNextSection animations
+    const jumpToNextSectionElements = Array.from(
+      document.querySelectorAll(this.animations.jumpToNextSection.default)
+    ).map((el) => {
+      return new JumpToNextSection({ element: el as HTMLElement, lenis: this.lenis })
+    })
+    this.animationsArray.push(...jumpToNextSectionElements)
   }
 
   show() {

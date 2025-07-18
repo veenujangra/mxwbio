@@ -31,9 +31,16 @@ export default class Animation {
     this.observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          this.animateIn()
+          if (!this.element.hasAttribute('data-allow-repeat')) {
+            this.animateIn()
+            this.observer.unobserve(this.element)
+          } else {
+            this.animateIn()
+          }
         } else {
-          this.animateOut()
+          if (this.element.hasAttribute('data-allow-repeat')) {
+            this.animateOut()
+          }
         }
       })
     }, this.observerOptions)

@@ -13,3 +13,22 @@
   background: red;
   pointer-events: none;
 } */
+.image-credit-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.image-credit {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 12px;
+  text-align: left;
+  z-index: 1;
+
+  pointer-events: auto;
+}

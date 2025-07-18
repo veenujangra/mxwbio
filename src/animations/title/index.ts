@@ -48,7 +48,7 @@ export default class Title extends Animation {
     }
     if (!this.text) return
 
-    if (!this.element || this.element.classList.contains('is-animated')) return
+    if (!this.element) return
     this.tl = gsap.timeline({})
 
     if (!this.text) return
@@ -71,7 +71,6 @@ export default class Title extends Animation {
           this.text?.revert()
           this.text = undefined
           this.tl = undefined
-          this.element.classList.add('is-animated')
         },
       }
     )
