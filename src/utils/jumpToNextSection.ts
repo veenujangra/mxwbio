@@ -53,8 +53,12 @@ export default class JumpToNextSection {
 
   handleProgressTracking() {
     const trackedSection = this.currentSection
-    const progressContainer = this.element.closest('.scroll_progress-wrapper')
+
+    const wrapper = this.element.parentNode as HTMLElement | null
+    const progressContainer = wrapper?.querySelector('.scroll_progress-wrapper') as HTMLElement | null
     const progressBar = progressContainer?.querySelector('.scroll_progress')
+
+    console.log(progressBar, progressContainer)
     if (!trackedSection || !progressBar) {
       console.warn('Progress tracking elements not found.')
       return
@@ -70,6 +74,7 @@ export default class JumpToNextSection {
           const progress = Number(tl.progress().toFixed(2))
 
           if (progress >= 0.9) {
+            console.log('Progress:', progress)
             this.element.closest('.jump_to_section')?.classList.add('hidden')
           } else {
             this.element.closest('.jump_to_section')?.classList.remove('hidden')
